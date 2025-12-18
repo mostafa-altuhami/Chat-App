@@ -1,0 +1,35 @@
+<resources>
+    <string name="splash_txt_name">Easy Chat</string>
+    <string name="splash_txt_Developer">Developed by Mustafa Al-Tuhami</string>
+    <string name="app_name">Chat Application</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="search_appbar_txt">Search User</string>
+    <string name="_3">3</string>
+    <string name="login_number_enter_tv">Enter mobile number</string>
+    <string name="otp_guids">Enter Otp sent to your phone number</string>
+    <string name="otp_et_hint">OTP</string>
+    <string name="otp_btn_txt">NEXT</string>
+    <string name="otp_tv_resent">Resend OTP in 30 sec</string>
+    <string name="username_tv_guids">Enter your username</string>
+    <string name="username_et_hint">Username</string>
+    <string name="username_btn_txt">Let me in</string>
+    <string name="login_number_et_hint">Mobile</string>
+    <string name="login_number_btn_txt">Send otp</string>
+    <string name="search_image">search image</string>
+    <string name="menue_chats">Chats</string>
+    <string name="menue_profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Chat Fragment</string>
+    <string name="hello_blank_fragment2">Profile Fragment</string>
+    <string name="search_user_row_tv_username">User Name</string>
+    <string name="search_user_row_tv_phone">+000000000000</string>
+    <string name="et_chat_message">Write the message</string>
+    <string name="user_image_all_project">User Image</string>
+    <string name="update_btn">Update Profile</string>
+    <string name="logoutText">Logout</string>
+    <string name="_99">99+</string>
+    <string name="seconds">" seconds"</string>
+    <string name="resend_the_otp1">Resend the OTP</string>
+    <string name="resend_the_otp_in">Resend the OTP in %1$d seconds</string>
+</resources>

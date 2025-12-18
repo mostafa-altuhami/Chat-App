@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+   <com.google.android.material.appbar.AppBarLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:background="@color/my_primary"
+       android:id="@+id/main_appbar">
+
+       <com.google.android.material.appbar.MaterialToolbar
+           android:layout_width="match_parent"
+           android:layout_height="?attr/actionBarSize"
+           android:id="@+id/main_toolbar"
+           app:title="@string/app_name"
+           app:titleTextColor="@color/white"
+           app:contentInsetStart="16dp"
+           app:contentInsetEnd="16dp"
+           app:popupTheme="@style/ThemeOverlay.Material3.Light"
+           app:subtitleTextAppearance="@style/Toolbar.TitleText">
+
+           <ImageButton
+               android:id="@+id/main_ib_search"
+               android:layout_width="42dp"
+               android:layout_height="42dp"
+               android:src="@drawable/icon_search"
+               android:background="?attr/selectableItemBackgroundBorderless"
+               app:tint="@color/white"
+               android:layout_gravity="end"
+               android:contentDescription="@string/search_image"/>
+
+       </com.google.android.material.appbar.MaterialToolbar>
+
+   </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/main_fl_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:clipToPadding="false"
+        android:animateLayoutChanges="true"
+        app:layout_constraintBottom_toTopOf="@+id/main_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_appbar"
+        />
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintBottom_toTopOf="@id/main_btn_nav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/main_divider"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_btn_nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white"
+        app:menu="@menu/btn_navigation_menue" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
