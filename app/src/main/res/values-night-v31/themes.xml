@@ -14,14 +14,6 @@
 
     <style name="Theme.ChatApplication.Splash" parent="Base.Theme.ChatApplication" >
 
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-
-        <item name="windowSplashScreenBackground">@android:color/transparent</item>
-        <item name="windowSplashScreenAnimatedIcon">@null</item>
-        <item name="windowSplashScreenAnimationDuration">0</item>
-        <item name="postSplashScreenTheme">@style/Theme.ChatApplication</item>
-
     </style>
 
 </resources>

@@ -10,7 +10,6 @@ import com.example.chatapplication.Model.ChatMessageModel;
 import com.example.chatapplication.Model.ChatroomModel;
 import com.example.chatapplication.Model.UserModel;
 import com.example.chatapplication.Utils.AndroidUtil;
-import com.example.chatapplication.Utils.FCMTokenUtil;
 import com.example.chatapplication.Utils.FirebaseUtils;
 import com.example.chatapplication.adapters.ChatRecyclerViewAdapter;
 import com.example.chatapplication.databinding.ActivityChatBinding;
@@ -172,7 +171,6 @@ public class ChatActivity extends AppCompatActivity {
                 .add(messageModel).addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
                         binding.chatEtMessage.setText("");
-                        sendNotificationToRecipient(message);
                     } else {
                         Log.e("ChatActivity", "Failed to send message");
                         AndroidUtil.showToast(this, "Failed to send message. Please try again.");
@@ -181,59 +179,6 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    // fun to send notifications to user
-    private void sendNotificationToRecipient(String message) {
-        Log.d("ChatActivity", "Attempting to send notification for message: " + message);
-
-        FirebaseUtils.allCollectionReference()
-                .document(model.getUserId())
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        UserModel recipient = task.getResult().toObject(UserModel.class);
-
-                        if (recipient == null) {
-                            Log.e("ChatActivity", "Recipient user model is null");
-                            return;
-                        }
-
-                        Log.d("ChatActivity", "Recipient FCM token: " + recipient.getFcmToken());
-
-                        if (recipient.getFcmToken() != null && !recipient.getFcmToken().isEmpty()) {
-                            Log.d("ChatActivity", "Valid FCM token found, getting sender info...");
-
-                            FirebaseUtils.currentUserDetails().get().addOnCompleteListener(senderTask -> {
-                                if (senderTask.isSuccessful() && senderTask.getResult() != null) {
-                                    UserModel sender = senderTask.getResult().toObject(UserModel.class);
-                                    if (sender != null) {
-                                        String title = sender.getUsername();
-
-                                        Log.d("ChatActivity", "Sending notification - Title: " + title + ", Body: " + message);
-                                        Log.d("ChatActivity", "Recipient token: " + recipient.getFcmToken());
-
-                                        FCMTokenUtil.sendNotification(
-                                                ChatActivity.this,
-                                                recipient.getFcmToken(),
-                                                title,
-                                                message,
-                                                FirebaseUtils.currentUserId(),
-                                                sender.getUsername()
-                                        );
-                                    } else {
-                                        Log.e("ChatActivity", "Sender user model is null");
-                                    }
-                                } else {
-                                    Log.e("ChatActivity", "Failed to get sender info: " + senderTask.getException());
-                                }
-                            });
-                        } else {
-                            Log.e("ChatActivity", "Recipient FCM token is null or empty");
-                        }
-                    } else {
-                        Log.e("ChatActivity", "Failed to get recipient info: " + task.getException());
-                    }
-                });
-    }
 
     @Override
     protected void onResume() {

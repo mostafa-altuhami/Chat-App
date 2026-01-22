@@ -22,24 +22,7 @@ android {
         viewBinding = true
     }
 
-    packaging {
-        resources {
-            excludes += setOf(
-                "META-INF/DEPENDENCIES",
-                "META-INF/LICENSE",
-                "META-INF/LICENSE.txt",
-                "META-INF/license.txt",
-                "META-INF/NOTICE",
-                "META-INF/NOTICE.txt",
-                "META-INF/notice.txt",
-                "META-INF/ASL2.0",
-                "META-INF/*.SF",
-                "META-INF/*.DSA",
-                "META-INF/*.RSA",
-                "META-INF/INDEX.LIST"
-            )
-        }
-    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -68,8 +51,6 @@ dependencies {
     implementation ("com.google.firebase:firebase-messaging")
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("com.google.auth:google-auth-library-oauth2-http:1.19.0")
-    implementation ("androidx.security:security-crypto:1.0.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
 
