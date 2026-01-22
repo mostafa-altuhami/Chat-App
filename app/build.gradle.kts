@@ -1,7 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
 }
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
+val cloudName: String = localProperties.getProperty("CLOUD_NAME") ?: ""
+
 
 android {
     namespace = "com.example.chatapplication"
@@ -16,10 +28,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "CLOUD_NAME",
+            "\"$cloudName\""
+        )
     }
+
+
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+
     }
 
 
