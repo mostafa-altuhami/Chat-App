@@ -4,97 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:weightSum="100"
-    tools:context=".LoginPhoneNumberActivity">
+    android:background="@android:color/white">
 
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/circular_background"
-        android:backgroundTint="@color/my_primary"
-        android:gravity="center"
-        android:text="@string/_1"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.33"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/circular_background"
-        android:backgroundTint="@color/light_gray"
-        android:gravity="center"
-        android:text="@string/_2"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/circular_background"
-        android:backgroundTint="@color/light_gray"
-        android:gravity="center"
-        android:text="@string/_3"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.63"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@null"
+        android:id="@+id/ivPhoneIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/ic_call"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:tint="@color/teal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        app:tint="@color/my_primary" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:letterSpacing="0.08"
-        android:text="@string/login_number_enter_tv"
-        android:textSize="25sp"
+        android:layout_marginTop="32dp"
+        android:text="@string/enter_your_nmobile_number"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@id/ivPhoneIcon" />
 
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/phone_cp_countryCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:ccp_contentColor="@color/light_gray"
+        app:ccp_contentColor="@color/teal_light"
         app:ccp_showFlag="false"
-        app:ccpDialog_textColor="@color/light_gray"
+        app:ccpDialog_textColor="@color/teal_light"
         app:ccp_showNameCode="false"
+        android:layout_marginStart="12dp"
+        app:ccp_arrowColor="@color/teal_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,15 +51,16 @@
         app:layout_constraintVertical_bias="0.6"
         />
 
+
     <EditText
         android:id="@+id/phone_et_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/edit_text_rounded_corner"
-        android:elevation="5dp"
         android:hint="@string/login_number_et_hint"
+        android:textColorHint="@color/teal_light"
+        android:textColor="@color/teal"
         android:inputType="phone"
+        android:layout_marginEnd="24dp"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/phone_cp_countryCode"
@@ -119,30 +69,45 @@
         app:layout_constraintVertical_bias="0.6"
         />
 
+
     <Button
+        android:text="@string/btn_continue"
+        app:style="@style/AppButton"
         android:id="@+id/phone_btn_send_otp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded_corner"
-        android:text="@string/login_number_btn_txt"
-        app:backgroundTint="@color/my_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="100dp"
+        app:backgroundTint="@color/teal"
+        app:layout_constraintTop_toBottomOf="@id/phone_et_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvSmsNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/an_sms_may_be_send_to_n_your_phone"
+        android:textAlignment="center"
+        android:textColor="@color/teal"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintTop_toBottomOf="@id/phone_btn_send_otp" />
 
     <ProgressBar
         android:id="@+id/phone_pb"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/my_primary"
+        android:indeterminateTint="@color/teal_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.93" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

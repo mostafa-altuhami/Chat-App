@@ -112,7 +112,6 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    // fun to get profile info
     private void getProfileInformation() {
         FirebaseUtils.currentUserDetails().get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -123,7 +122,7 @@ public class ProfileFragment extends Fragment {
                         binding.fragmentProfilePhoneTv.setText(profile.getPhone());
                         // check if there is an image
                         if (profile.getImageUrl() == null || profile.getImageUrl().isEmpty()) {
-                            binding.fragmentProfileIv.setImageResource(R.drawable.user);
+                            binding.fragmentProfileIv.setImageResource(R.drawable.ic_person);
                         } else {
                             Glide.with(requireContext())
                                     .load(profile.getImageUrl())

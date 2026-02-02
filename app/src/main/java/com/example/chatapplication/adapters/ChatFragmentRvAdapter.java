@@ -51,7 +51,7 @@ public class ChatFragmentRvAdapter extends
                         Glide.with(context)
                                 .load(otherUser.getImageUrl())
                                 .circleCrop()
-                                .placeholder(R.drawable.user)
+                                .placeholder(R.drawable.ic_person)
                                 .into(holder.binding.chatFragmentRvIvPhoto.profileImageView);
 
                         // if the last message was by me add "You" before it

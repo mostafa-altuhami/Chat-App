@@ -4,131 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="20dp"
-    android:weightSum="100"
-    android:fitsSystemWindows="true"
-    tools:context=".LoginUsernameActivity">
+    android:background="@android:color/white">
 
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/circular_background"
-        android:backgroundTint="@color/light_gray"
-        android:gravity="center"
-        android:text="@string/_1"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.33"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/circular_background"
-        android:backgroundTint="@color/light_gray"
-        android:gravity="center"
-        android:text="@string/_2"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
-
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/circular_background"
-        android:backgroundTint="@color/my_primary"
-        android:gravity="center"
-        android:text="@string/_3"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.63"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
 
     <ImageView
         android:id="@+id/username_iv_picture"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
         android:contentDescription="@null"
-        android:src="@drawable/user"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_person"
+        app:tint="@color/teal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:letterSpacing="0.08"
+        android:layout_marginTop="32dp"
         android:text="@string/username_tv_guids"
-        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintTop_toBottomOf="@id/username_iv_picture" />
+
+
 
     <EditText
         android:id="@+id/username_et_username"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/edit_text_rounded_corner"
-        android:elevation="5dp"
         android:hint="@string/username_et_hint"
-        android:inputType="text"
+        android:textColor="@color/teal"
+        android:textColorHint="@color/teal_light"
+        android:inputType="phone"
+        android:layout_marginHorizontal="70dp"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
+        app:layout_constraintVertical_bias="0.6"
+        />
 
 
     <Button
+        android:text="@string/btn_continue"
+        app:style="@style/AppButton"
         android:id="@+id/username_btn_in"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded_corner"
-        android:text="@string/username_btn_txt"
-        app:backgroundTint="@color/my_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="100dp"
+        app:backgroundTint="@color/teal"
+        app:layout_constraintTop_toBottomOf="@id/username_et_username"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
     <ProgressBar
         android:id="@+id/username_pb"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/my_primary"
+        android:indeterminateTint="@color/teal_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
-
+        app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

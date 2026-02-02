@@ -11,7 +11,7 @@
     <string name="otp_et_hint">OTP</string>
     <string name="otp_btn_txt">NEXT</string>
     <string name="otp_tv_resent">Resend OTP in 30 sec</string>
-    <string name="username_tv_guids">Enter your username</string>
+    <string name="username_tv_guids">Enter your \nusername</string>
     <string name="username_et_hint">Username</string>
     <string name="username_btn_txt">Let me in</string>
     <string name="login_number_et_hint">Mobile</string>
@@ -32,4 +32,16 @@
     <string name="seconds">" seconds"</string>
     <string name="resend_the_otp1">Resend the OTP</string>
     <string name="resend_the_otp_in">Resend the OTP in %1$d seconds</string>
+    <string name="enter_mobile_number">Mobile number</string>
+    <string name="btn_continue">CONTINUE</string>
+    <string name="enter_your_nmobile_number">Enter your\nmobile number</string>
+    <string name="an_sms_may_be_send_to_n_your_phone">An SMS may be send to\n your phone</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="verify">VERIFY</string>
+    <string name="you_can_t_see_the_otp">you can\'t see the otp ?</string>
+    <string name="resend">Resend</string>
+    <string name="john_doe">John Doe</string>
+    <string name="_01234512345">01234512345</string>
+    <string name="account">Account</string>
+    <string name="log_out">Log out</string>
 </resources>

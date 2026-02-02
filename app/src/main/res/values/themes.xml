@@ -3,8 +3,8 @@
     <style name="Base.Theme.ChatApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/my_primary</item>
         <item name="colorSecondary">@color/my_secondary</item>
-        <item name="android:statusBarColor">@color/black</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/teal</item>
+        <item name="android:navigationBarColor">@color/teal</item>
 
     </style>
 
@@ -20,4 +20,11 @@
 
 
     </style>
+
+    <style name="AppButton">
+        <item name="android:background">@drawable/btn_bg</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">14dp</item>
+    </style>
+
 </resources>

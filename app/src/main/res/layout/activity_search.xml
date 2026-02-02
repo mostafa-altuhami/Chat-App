@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/my_primary"
+        android:background="@color/teal"
         android:id="@+id/search_appbar">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -40,10 +40,9 @@
         app:layout_constraintEnd_toStartOf="@+id/search_ib_search"
         android:layout_marginTop="18sp"
         android:hint="@string/username_et_hint"
+        android:textColorHint="@color/teal_light"
         android:layout_marginStart="10dp"
-        android:elevation="5dp"
         android:padding="10dp"
-        android:background="@drawable/edit_text_rounded_corner"
         android:inputType="text"
          />
 
@@ -57,8 +56,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_ed_username"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="12dp"
-        app:tint="@color/my_primary"
+        app:tint="@color/teal"
         android:contentDescription="@string/search_image"/>
 
     <androidx.recyclerview.widget.RecyclerView

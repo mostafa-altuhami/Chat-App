@@ -42,7 +42,7 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
         Glide.with(context)
                 .load(model.getImageUrl())
                 .circleCrop()
-                .placeholder(R.drawable.user)
+                .placeholder(R.drawable.ic_person)
                 .into(holder.binding.searchUserRowIvPictureId.profileImageView);
 
 

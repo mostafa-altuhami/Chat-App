@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         Glide.with(getBaseContext())
                 .load(model.getImageUrl())
                 .circleCrop()
-                .placeholder(R.drawable.user)
+                .placeholder(R.drawable.ic_person)
                 .into(binding.chatProfilePic.profileImageView);
 
         binding.chatToolbar.setNavigationOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());

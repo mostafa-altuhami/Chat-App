@@ -12,8 +12,8 @@
         android:id="@+id/fragmentProfileIv"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/circular_background"
-        android:src="@drawable/user"
+        android:background="@drawable/circle_background"
+        android:src="@drawable/ic_person"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2"
-        tools:backgroundTint="@color/my_primary" />
+        tools:backgroundTint="@color/teal" />
 
     <EditText
         android:id="@+id/fragmentProfileUsernameTv"
@@ -31,6 +31,8 @@
         android:background="@drawable/edit_text_rounded_corner"
         android:elevation="5dp"
         android:hint="@string/username_et_hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/off_white"
         android:inputType="text"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,6 +50,8 @@
         android:elevation="5dp"
         android:enabled="false"
         android:hint="@string/search_user_row_tv_phone"
+        android:textColorHint="@color/off_white"
+        android:textColor="@color/white"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
