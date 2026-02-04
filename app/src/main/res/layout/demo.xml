@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,19 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/icDone"
+    <ImageButton
+        android:id="@+id/fragmentProfileUpdateBtn"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_margin="16dp"
+        android:layout_margin="24dp"
         android:src="@drawable/ic_done"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:tint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="invisible"
         tools:visibility="visible"/>
 
-    <!-- Profile Image -->
+
     <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="120dp"
@@ -45,7 +47,6 @@
         android:layout_width="116dp"
         android:layout_height="116dp"
         android:background="@drawable/circle_background"
-        android:backgroundTint="@color/teal_light"
         android:contentDescription="@null"
         android:padding="24dp"
         android:src="@drawable/ic_person"
@@ -87,7 +88,7 @@
         android:id="@+id/contentBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="color/white"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -144,7 +145,9 @@
             android:layout_marginHorizontal="70dp"
             android:layout_marginBottom="24dp"
             android:padding="10dp"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
 
 
         <View
@@ -167,5 +170,18 @@
           />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/fragmentProfilePb"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/teal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

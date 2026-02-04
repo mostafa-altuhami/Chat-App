@@ -24,7 +24,7 @@
     <string name="hello_blank_fragment2">Profile Fragment</string>
     <string name="search_user_row_tv_username">User Name</string>
     <string name="search_user_row_tv_phone">+000000000000</string>
-    <string name="et_chat_message">Write the message</string>
+    <string name="et_chat_message">message</string>
     <string name="user_image_all_project">User Image</string>
     <string name="update_btn">Update Profile</string>
     <string name="logoutText">Logout</string>

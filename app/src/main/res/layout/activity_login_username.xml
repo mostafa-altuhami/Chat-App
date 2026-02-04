@@ -14,7 +14,7 @@
         android:layout_marginTop="100dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_person"
-        app:tint="@color/teal"
+        app:backgroundTint="@color/teal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
 
     <Button
         android:text="@string/btn_continue"
-        app:style="@style/AppButton"
+        style="@style/AppButton"
         android:id="@+id/username_btn_in"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
