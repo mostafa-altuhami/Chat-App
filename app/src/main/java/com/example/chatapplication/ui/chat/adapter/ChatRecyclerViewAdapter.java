@@ -1,4 +1,4 @@
-package com.example.chatapplication.adapters;
+package com.example.chatapplication.ui.chat.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,13 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.chatapplication.Model.ChatMessageModel;
-import com.example.chatapplication.Utils.FirebaseUtils;
+import com.example.chatapplication.data.model.ChatMessageModel;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.databinding.ChatMessageRowBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-// rv that display the messages between users
 public class ChatRecyclerViewAdapter extends FirestoreRecyclerAdapter<ChatMessageModel, ChatRecyclerViewAdapter.ChatMessageViewHolder> {
 
     Context context;

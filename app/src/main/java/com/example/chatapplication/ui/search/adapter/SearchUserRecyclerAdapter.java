@@ -1,4 +1,4 @@
-package com.example.chatapplication.adapters;
+package com.example.chatapplication.ui.search.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,18 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.chatapplication.ChatActivity;
-import com.example.chatapplication.Model.UserModel;
+import com.example.chatapplication.ui.chat.ChatActivity;
+import com.example.chatapplication.data.model.UserModel;
 import com.example.chatapplication.R;
-import com.example.chatapplication.Utils.AndroidUtil;
-import com.example.chatapplication.Utils.FirebaseUtils;
+import com.example.chatapplication.utils.AndroidUtil;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.databinding.SearchUserRecyclerRowBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.Objects;
 
-// rv for search items
 public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserModel, SearchUserRecyclerAdapter.UserModelViewHolder> {
 
    Context context;
@@ -46,9 +45,7 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
                 .into(holder.binding.searchUserRowIvPictureId.profileImageView);
 
 
-        // onClick event
         holder.itemView.setOnClickListener(view -> {
-           // navigate to chat activity
             Intent intent = new Intent(context, ChatActivity.class);
             AndroidUtil.passUserModelAsIntent(intent, model);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,8 +1,7 @@
-package com.example.chatapplication.Model;
+package com.example.chatapplication.data.model;
 
 import com.google.firebase.Timestamp;
 
-// model class for message
 public class ChatMessageModel {
     private String message;
     protected String senderId;

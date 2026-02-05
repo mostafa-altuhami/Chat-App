@@ -1,4 +1,4 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.main.chats;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -8,14 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.chatapplication.Model.ChatroomModel;
-import com.example.chatapplication.Utils.FirebaseUtils;
-import com.example.chatapplication.adapters.ChatFragmentRvAdapter;
+import com.example.chatapplication.data.model.ChatroomModel;
+import com.example.chatapplication.utils.FirebaseUtils;
+import com.example.chatapplication.ui.main.chats.adapter.ChatFragmentRvAdapter;
 import com.example.chatapplication.databinding.FragmentChatBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
-// chat fragment
 public class ChatFragment extends Fragment {
 
     private FragmentChatBinding binding;
@@ -28,14 +27,12 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentChatBinding.inflate(inflater, container, false);
         setupRecyclerView();
         return binding.getRoot();
     }
 
 
-    // fun to setup the recycle view
     private void setupRecyclerView() {
         // query to get all chats and sort them in descending order
         Query query = FirebaseUtils.allChatroomCollections()

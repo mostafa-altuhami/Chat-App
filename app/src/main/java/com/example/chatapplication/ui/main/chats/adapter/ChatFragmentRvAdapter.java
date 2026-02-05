@@ -1,4 +1,4 @@
-package com.example.chatapplication.adapters;
+package com.example.chatapplication.ui.main.chats.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,17 +8,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.example.chatapplication.ChatActivity;
-import com.example.chatapplication.Model.ChatroomModel;
-import com.example.chatapplication.Model.UserModel;
+import com.example.chatapplication.ui.chat.ChatActivity;
+import com.example.chatapplication.data.model.ChatroomModel;
+import com.example.chatapplication.data.model.UserModel;
 import com.example.chatapplication.R;
-import com.example.chatapplication.Utils.AndroidUtil;
-import com.example.chatapplication.Utils.FirebaseUtils;
+import com.example.chatapplication.utils.AndroidUtil;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.databinding.ChatFragmentRvRowBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-// rv that display all chat rooms
 public class ChatFragmentRvAdapter extends
         FirestoreRecyclerAdapter<ChatroomModel, ChatFragmentRvAdapter.ChatFragmentRvViewHolder> {
 
@@ -36,7 +35,7 @@ public class ChatFragmentRvAdapter extends
 
         FirebaseUtils.otherChatroomReference(model.getUserIds())
                 .addSnapshotListener((snapshot, error) -> {
-                    // check if there is an error
+
                     if (error != null || snapshot == null || !snapshot.exists()) return;
 
                     UserModel otherUser = snapshot.toObject(UserModel.class);
@@ -78,7 +77,6 @@ public class ChatFragmentRvAdapter extends
                             holder.binding.chatFragmentRvTvUnreadCount.setVisibility(View.GONE);
                         }
 
-                        // onClick event
                         holder.itemView.setOnClickListener(view -> {
                             // open chat activity with data of the user
                             Intent intent = new Intent(context, ChatActivity.class);

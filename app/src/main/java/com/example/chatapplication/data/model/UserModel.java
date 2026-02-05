@@ -1,8 +1,7 @@
-package com.example.chatapplication.Model;
+package com.example.chatapplication.data.model;
 
 import com.google.firebase.Timestamp;
 
-// model class for user
 public class UserModel {
     private String phone;
     private String username;

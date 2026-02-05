@@ -1,4 +1,4 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.os.CountDownTimer;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.chatapplication.Utils.AndroidUtil;
+
+import com.example.chatapplication.R;
+import com.example.chatapplication.utils.AndroidUtil;
 import com.example.chatapplication.databinding.ActivityLoginOtpBinding;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,8 +18,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 
-
-// activity for the OTP verification
 public class LoginOtpActivity extends AppCompatActivity {
 
     private ActivityLoginOtpBinding binding;
@@ -34,7 +34,6 @@ public class LoginOtpActivity extends AppCompatActivity {
         binding = ActivityLoginOtpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // get the phone number from the intent
         phoneNumber = getIntent().getExtras().getString("phone");
 
 
@@ -56,12 +55,10 @@ public class LoginOtpActivity extends AppCompatActivity {
 
     }
 
-    // fun to sent the OTP to to the user
     void sendOtp(String phoneNumber, boolean isResend) {
         startResendTimer();
         setInProgress(true);
 
-        // send the OTP to the user
         PhoneAuthOptions.Builder builder = PhoneAuthOptions.newBuilder(mAuth)
                 .setPhoneNumber(phoneNumber)
                 .setTimeout(timeout, TimeUnit.SECONDS)
@@ -97,7 +94,6 @@ public class LoginOtpActivity extends AppCompatActivity {
         }
     }
 
-    // fun to control in progress bar
     void setInProgress (boolean inProgress) {
         if (inProgress) {
             binding.otpPb.setVisibility(View.VISIBLE);
@@ -112,9 +108,7 @@ public class LoginOtpActivity extends AppCompatActivity {
         setInProgress(true);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             setInProgress(false);
-            // check if the task is completed successfully
             if (task.isSuccessful()){
-                // swap to the username activity with the phone number
                 Intent intent = new Intent(LoginOtpActivity.this, LoginUsernameActivity.class);
                 intent.putExtra("phone", phoneNumber);
                 startActivity(intent);
@@ -125,12 +119,10 @@ public class LoginOtpActivity extends AppCompatActivity {
         });
     }
 
-    // fun to calculate the amount of seconds
     void startResendTimer() {
         binding.otpTvResend.setEnabled(false);
 
 
-        // start the counter
         new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long l) {

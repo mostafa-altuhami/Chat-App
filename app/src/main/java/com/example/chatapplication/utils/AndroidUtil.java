@@ -1,18 +1,16 @@
-package com.example.chatapplication.Utils;
+package com.example.chatapplication.utils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
-import com.example.chatapplication.Model.UserModel;
+import com.example.chatapplication.data.model.UserModel;
 
 public class AndroidUtil {
 
-    // fun shows a toast
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-    // fun to pass data to a specific intent
     public static void passUserModelAsIntent(Intent intent, UserModel userModel) {
         intent.putExtra("username", userModel.getUsername());
         intent.putExtra("phone", userModel.getPhone());
@@ -21,7 +19,6 @@ public class AndroidUtil {
         intent.putExtra("fcmToken", userModel.getFcmToken());
     }
 
-    // fun to get data from a specific intent
     public static UserModel getUserModelFromIntent(Intent intent) {
         UserModel model = new UserModel();
         model.setUsername(intent.getStringExtra("username"));

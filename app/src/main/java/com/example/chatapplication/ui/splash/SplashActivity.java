@@ -1,15 +1,17 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.splash;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.chatapplication.Model.UserModel;
-import com.example.chatapplication.Utils.AndroidUtil;
-import com.example.chatapplication.Utils.FirebaseUtils;
+import com.example.chatapplication.data.model.UserModel;
+import com.example.chatapplication.utils.AndroidUtil;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.databinding.ActivitySplashScreenBinding;
+import com.example.chatapplication.ui.auth.LoginPhoneNumberActivity;
+import com.example.chatapplication.ui.chat.ChatActivity;
+import com.example.chatapplication.ui.main.MainActivity;
 
-// Custom Splash screen
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
     private ActivitySplashScreenBinding binding;
@@ -19,7 +21,6 @@ public class SplashActivity extends AppCompatActivity {
         binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // handle open app behavior when the user click on the notification
         if (FirebaseUtils.isLoggedIn()
                 && getIntent() != null
                 && getIntent().hasExtra("userId")) {
@@ -62,7 +63,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    // fun to open main activity
     private void openMain() {
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         finish();

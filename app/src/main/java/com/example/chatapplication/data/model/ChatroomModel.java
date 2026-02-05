@@ -1,4 +1,4 @@
-package com.example.chatapplication.Model;
+package com.example.chatapplication.data.model;
 
 import com.google.firebase.Timestamp;
 
@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// model class for chat room
 public class ChatroomModel {
     private String chatroomId;
 

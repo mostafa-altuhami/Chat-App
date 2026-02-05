@@ -1,6 +1,6 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.main.profile;
 
-import static com.example.chatapplication.other.Constants.UPLOAD_PRESET;
+import static com.example.chatapplication.utils.Constants.UPLOAD_PRESET;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,10 +18,13 @@ import com.bumptech.glide.Glide;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
-import com.example.chatapplication.Model.UserModel;
-import com.example.chatapplication.Utils.AndroidUtil;
-import com.example.chatapplication.Utils.FirebaseUtils;
+import com.example.chatapplication.data.model.UserModel;
+import com.example.chatapplication.R;
+import com.example.chatapplication.utils.AndroidUtil;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.databinding.FragmentProfileBinding;
+import com.example.chatapplication.ui.auth.LoginPhoneNumberActivity;
+
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -120,7 +123,6 @@ public class ProfileFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         binding.fragmentProfileUsernameTv.setText(profile.getUsername());
                         binding.fragmentProfilePhoneTv.setText(profile.getPhone());
-                        // check if there is an image
                         if (profile.getImageUrl() == null || profile.getImageUrl().isEmpty()) {
                             binding.fragmentProfileIv.setImageResource(R.drawable.ic_person);
                         } else {
@@ -137,7 +139,6 @@ public class ProfileFragment extends Fragment {
          });
     }
 
-    // fun to upload the image to server
     private void uploadToCloudinary(Uri imageUri) {
         // upload the image
         MediaManager.get().upload(imageUri).unsigned(UPLOAD_PRESET).callback(new UploadCallback() {
@@ -170,7 +171,6 @@ public class ProfileFragment extends Fragment {
         }).dispatch();
     }
 
-    // fun to control in progress bar
     private void setInProgress (boolean inProgress) {
         requireActivity().runOnUiThread(() -> {
             if (inProgress) {

@@ -1,18 +1,17 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.search;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.chatapplication.Model.UserModel;
-import com.example.chatapplication.Utils.FirebaseUtils;
-import com.example.chatapplication.adapters.SearchUserRecyclerAdapter;
+import com.example.chatapplication.data.model.UserModel;
+import com.example.chatapplication.utils.FirebaseUtils;
+import com.example.chatapplication.ui.search.adapter.SearchUserRecyclerAdapter;
 import com.example.chatapplication.databinding.ActivitySearchBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
-// activity for searching the users
 public class SearchActivity extends AppCompatActivity {
 
     private ActivitySearchBinding binding;
@@ -27,29 +26,23 @@ public class SearchActivity extends AppCompatActivity {
         binding.searchEdUsername.requestFocus();
 
 
-        //getOnBackPressedDispatcher().onBackPressed()
         binding.searchToolbar.setNavigationOnClickListener(view -> finish());
 
 
         binding.searchIbSearch.setOnClickListener(view -> {
-            // get the user search text
             String searchTerm = binding.searchEdUsername.getText().toString();
-            // check if it's empty
             if (searchTerm.isEmpty()) {
                 binding.searchEdUsername.setError("Invalid Username");
                 return;
             }
 
-            // setup rv
             setupSearchRecyclerView(searchTerm);
         });
 
     }
 
 
-    // fun to setup the recycle view
     private void setupSearchRecyclerView(String searchTerm) {
-        // query to get the user by his nam's characters
         Query query = FirebaseUtils.allCollectionReference()
                 .orderBy("username")
                 .startAt(searchTerm)
@@ -83,7 +76,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onResume();
         if (adapter != null)
             adapter.startListening();
-            // binding.searchRvUsers.post(() -> adapter.notifyDataSetChanged());
     }
 
 

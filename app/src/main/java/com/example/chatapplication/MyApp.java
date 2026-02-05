@@ -1,6 +1,6 @@
 package com.example.chatapplication;
 
-import static com.example.chatapplication.other.Constants.CLOUD_NAME;
+import static com.example.chatapplication.utils.Constants.CLOUD_NAME;
 import android.app.Application;
 import com.cloudinary.android.MediaManager;
 

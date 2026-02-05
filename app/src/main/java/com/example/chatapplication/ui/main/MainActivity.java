@@ -1,12 +1,17 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.main;
 
 import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.chatapplication.Utils.FirebaseUtils;
+
+import com.example.chatapplication.ui.main.profile.ProfileFragment;
+import com.example.chatapplication.R;
+import com.example.chatapplication.ui.search.SearchActivity;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.databinding.ActivityMainBinding;
+import com.example.chatapplication.ui.main.chats.ChatFragment;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ChatFragment chatFragment;
     private ProfileFragment profileFragment;
-
-    // launcher to request notifications permission
-
 
 
     @Override
@@ -37,11 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.mainIbSearch.setOnClickListener((v) ->
-                // swap to search activity without data
                 startActivity(new Intent(getBaseContext(), SearchActivity.class))
         );
 
-        // handle menue item state
         binding.mainBtnNav.setOnItemSelectedListener(menuItem -> {
             if (menuItem.getItemId() == R.id.menue_chat) {
                 getSupportFragmentManager().beginTransaction().replace(binding.mainFlContent.getId(), chatFragment).commit();

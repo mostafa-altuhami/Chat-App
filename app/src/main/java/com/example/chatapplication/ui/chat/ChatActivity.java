@@ -1,4 +1,4 @@
-package com.example.chatapplication;
+package com.example.chatapplication.ui.chat;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,12 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.example.chatapplication.Model.ChatMessageModel;
-import com.example.chatapplication.Model.ChatroomModel;
-import com.example.chatapplication.Model.UserModel;
-import com.example.chatapplication.Utils.AndroidUtil;
-import com.example.chatapplication.Utils.FirebaseUtils;
-import com.example.chatapplication.adapters.ChatRecyclerViewAdapter;
+import com.example.chatapplication.data.model.ChatMessageModel;
+import com.example.chatapplication.data.model.ChatroomModel;
+import com.example.chatapplication.data.model.UserModel;
+import com.example.chatapplication.R;
+import com.example.chatapplication.utils.AndroidUtil;
+import com.example.chatapplication.utils.FirebaseUtils;
+import com.example.chatapplication.ui.chat.adapter.ChatRecyclerViewAdapter;
 import com.example.chatapplication.databinding.ActivityChatBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.Timestamp;
@@ -19,7 +20,6 @@ import com.google.firebase.firestore.Query;
 import java.util.Arrays;
 import java.util.Objects;
 
-// activity for chats
 public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatBinding binding;
@@ -36,7 +36,6 @@ public class ChatActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
 
-        // get other UserModel
         model = AndroidUtil.getUserModelFromIntent(getIntent());
         chatroomId = FirebaseUtils.getChatroomId(FirebaseUtils.currentUserId(), model.getUserId());
 
@@ -69,7 +68,6 @@ public class ChatActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> {
                         Log.e("ChatActivity", "Failed to check chat status", e);
-                        // Still send message even if check fails
                         sendMessageToUser(message);
 
                     });
@@ -81,9 +79,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    // fun to setup recycle view
     private void setupRecyclerView() {
-        // query for descending messages
         Query query = FirebaseUtils.getChatroomCollectionReference(chatroomId)
                 .orderBy("timestamp", Query.Direction.DESCENDING);
 
@@ -97,13 +93,11 @@ public class ChatActivity extends AppCompatActivity {
         binding.chatRvMessages.setLayoutManager(manager);
         binding.chatRvMessages.setAdapter(adapter);
         adapter.startListening();
-        // observe message to be updated with the user ui
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
 
-                // go to the last message
                 binding.chatRvMessages.smoothScrollToPosition(0);
             }
         });
@@ -111,7 +105,6 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    // fun to get chat room model
     private void getOrCreateChatroomModel() {
         FirebaseUtils.getChatroomReference(chatroomId).get().addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
@@ -126,7 +119,6 @@ public class ChatActivity extends AppCompatActivity {
                    FirebaseUtils.getChatroomReference(chatroomId).set(chatroomModel)
                            .addOnSuccessListener(aVoid -> Log.d("ChatActivity", "Chatroom created successfully"))
                            .addOnFailureListener(e -> {
-                               Log.e("ChatActivity", "Failed to create chatroom", e);
                                AndroidUtil.showToast(this, "Failed to load chat. Please try again.");
                                finish(); // Close activity if can't create chatroom
                            });
@@ -138,7 +130,6 @@ public class ChatActivity extends AppCompatActivity {
 
                }
            } else {
-               Log.e("ChatActivity", "Failed to get chatroom");
                AndroidUtil.showToast(this, "Failed to load chat. Please check your connection.");
                finish();
            }
@@ -157,7 +148,6 @@ public class ChatActivity extends AppCompatActivity {
                 "lastMessageSenderId", FirebaseUtils.currentUserId(),
                 "lastMessageTimestamp", Timestamp.now()
         ).addOnFailureListener(e -> {
-            Log.e("ChatActivity", "Failed to update chatroom", e);
             AndroidUtil.showToast(this, "Failed to send message. Please try again.");
         });
 
@@ -172,7 +162,6 @@ public class ChatActivity extends AppCompatActivity {
                     if(task.isSuccessful()) {
                         binding.chatEtMessage.setText("");
                     } else {
-                        Log.e("ChatActivity", "Failed to send message");
                         AndroidUtil.showToast(this, "Failed to send message. Please try again.");
                     }
 
