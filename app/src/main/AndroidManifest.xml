@@ -27,9 +27,6 @@
             android:name=".ui.search.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.auth.LoginUsernameActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.auth.LoginOtpActivity"
             android:exported="false" />
         <activity
