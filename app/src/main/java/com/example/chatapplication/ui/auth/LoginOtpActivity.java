@@ -2,13 +2,13 @@ package com.example.chatapplication.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.chatapplication.R;
 import com.example.chatapplication.databinding.ActivityLoginOtpBinding;
 import com.example.chatapplication.ui.main.MainActivity;
+import com.example.chatapplication.utils.AndroidUtil;
 
 public class LoginOtpActivity extends AppCompatActivity {
 
@@ -28,6 +28,8 @@ public class LoginOtpActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         observeState();
+        observeTimer();
+        observeToast();
 
         viewModel.sendOtp(phoneNumber, this);
 
@@ -54,12 +56,12 @@ public class LoginOtpActivity extends AppCompatActivity {
 
                 case CODE_SENT:
                     setLoading(false);
-                    startResendTimer();
                     break;
 
                 case VERIFIED:
                     setLoading(false);
                     Intent intent = new Intent(this , MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     break;
 
@@ -71,28 +73,26 @@ public class LoginOtpActivity extends AppCompatActivity {
         });
     }
 
+    private void observeTimer() {
+        viewModel.getTimerText().observe(this, leftSeconds -> {
+            if (leftSeconds > 0)
+                binding.otpTvResend.setText(getString(R.string.resend_the_otp_in, leftSeconds));
+            else
+                binding.otpTvResend.setText(R.string.resend_the_otp1);
+        });
+
+        viewModel.getIsResendEnabled().observe(this , isEnabled ->
+                binding.otpTvResend.setEnabled(isEnabled));
+    }
+
+    private void observeToast() {
+        viewModel.getToastMessage().observe(this, message ->
+                AndroidUtil.showToast(this, message));
+    }
+
     private void setLoading(boolean loading) {
         binding.otpPb.setVisibility(loading ? View.VISIBLE : View.GONE);
         binding.otpBtnNext.setVisibility(loading ? View.GONE : View.VISIBLE);
     }
 
-
-    void startResendTimer() {
-        binding.otpTvResend.setEnabled(false);
-
-
-        new CountDownTimer(60000, 1000) {
-            @Override
-            public void onTick(long l) {
-                long leftSeconds = l / 1000;
-                binding.otpTvResend.setText(getString(R.string.resend_the_otp_in, leftSeconds));
-            }
-
-            @Override
-            public void onFinish() {
-                binding.otpTvResend.setEnabled(true);
-                binding.otpTvResend.setText(R.string.resend_the_otp1);
-            }
-        }.start();
-    }
 }

@@ -3,23 +3,20 @@ package com.example.chatapplication.ui.main.chats;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.chatapplication.data.model.ChatroomModel;
-import com.example.chatapplication.utils.FirebaseUtils;
 import com.example.chatapplication.ui.main.chats.adapter.ChatFragmentRvAdapter;
 import com.example.chatapplication.databinding.FragmentChatBinding;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.Query;
+
 
 public class ChatFragment extends Fragment {
 
     private FragmentChatBinding binding;
     private ChatFragmentRvAdapter adapter;
-
+    ChatsViewModel viewModel;
 
     public ChatFragment() {}
 
@@ -28,35 +25,17 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentChatBinding.inflate(inflater, container, false);
+        viewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
         setupRecyclerView();
+
         return binding.getRoot();
     }
 
 
     private void setupRecyclerView() {
-        // query to get all chats and sort them in descending order
-        Query query = FirebaseUtils.allChatroomCollections()
-                .whereArrayContains("userIds", FirebaseUtils.currentUserId())
-                .orderBy("lastMessageTimestamp", Query.Direction.DESCENDING);
-
-        query.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.d("ChatFragment", "Query returned " + task.getResult().size() + " chatrooms");
-                task.getResult().getDocuments().forEach(doc -> Log.d("ChatFragment", "Chatroom: " + doc.getId() + ", Data: " + doc.getData()));
-            } else {
-                Log.e("ChatFragment", "Query failed: ", task.getException());
-            }
-        });
-
-        FirestoreRecyclerOptions<ChatroomModel> options = new FirestoreRecyclerOptions.Builder<ChatroomModel>()
-                .setQuery(query, ChatroomModel.class)
-                .setLifecycleOwner(requireActivity())
-                .build();
-
-        adapter = new ChatFragmentRvAdapter(options, requireContext());
+        adapter = new ChatFragmentRvAdapter(viewModel.getChatroomsOptions(getViewLifecycleOwner()), requireContext());
         binding.chatFragmentRv.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.chatFragmentRv.setAdapter(adapter);
-        // IT"s Important for rv normal behavior
         binding.chatFragmentRv.setItemAnimator(null);
     }
 

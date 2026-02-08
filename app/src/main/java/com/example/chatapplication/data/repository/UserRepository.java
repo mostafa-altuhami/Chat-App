@@ -4,11 +4,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.chatapplication.data.model.UserModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserRepository {
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db;
+    private final FirebaseAuth auth;
+
+
+    public UserRepository() {
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+    }
+
+    public FirebaseUser getUser() {
+        return auth.getCurrentUser();
+    }
 
     public LiveData<UserModel> getUserDetails(String userId) {
         MutableLiveData<UserModel> user = new MutableLiveData<>();
