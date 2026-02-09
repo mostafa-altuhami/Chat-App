@@ -10,7 +10,7 @@ import com.example.chatapplication.data.repository.AuthRepository;
 
 public class AuthViewModel extends ViewModel {
 
-    private final AuthRepository repository;
+    private  final AuthRepository repository;
     private final MutableLiveData<AuthUiState> uiState;
     private final MutableLiveData<Long> timerText;
     private final MutableLiveData<Boolean> isResendEnabled;
@@ -20,7 +20,7 @@ public class AuthViewModel extends ViewModel {
     private boolean otpSent = false;
 
     public AuthViewModel() {
-        repository = new AuthRepository();
+        repository = AuthRepository.getRepositoryInstance();
         uiState = new MutableLiveData<>(AuthUiState.idle());
         timerText = new MutableLiveData<>();
         isResendEnabled = new MutableLiveData<>();

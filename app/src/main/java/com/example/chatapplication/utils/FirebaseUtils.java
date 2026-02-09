@@ -47,12 +47,8 @@ public class FirebaseUtils {
     }
 
 
-    public static CollectionReference allChatroomCollections () {
-        return FirebaseFirestore.getInstance().collection("chatrooms");
-    }
-
     public static DocumentReference otherChatroomReference (List<String> userIds) {
-        if (userIds.get(0).equals(FirebaseUtils.currentUserId()))
+        if (userIds.get(0).equals(currentUserId()))
             return allCollectionReference().document(userIds.get(1));
         else
             return allCollectionReference().document(userIds.get(0));
@@ -69,31 +65,5 @@ public class FirebaseUtils {
     }//
 
 
-    public static void incrementUnreadCount(String chatroomId, String userId) {
-        String fieldPath = "unreadMessages." + userId;
-
-        getChatroomReference(chatroomId)
-                .update(fieldPath, FieldValue.increment(1))
-                .addOnSuccessListener(aVoid -> Log.d("TAG", "Unread count incremented for user: " + userId))
-
-                .addOnFailureListener(e -> Log.e("TAG", "Failed to increment unread count", e));
-    }
-
-
-    public static void resetUnreadCount(String chatroomId, String userId) {
-        String fieldPath = "unreadMessages." + userId;
-
-        getChatroomReference(chatroomId)
-                .update(fieldPath, 0)
-                .addOnSuccessListener(aVoid -> Log.d("TAG", "Unread count reset for user: " + userId))
-
-                .addOnFailureListener(e -> Log.e("TAG", "Failed to reset unread count", e));
-    }
-
-
-    public static void setActiveStatus(String chatroomId,String userId, boolean isActive) {
-        getChatroomReference(chatroomId)
-                .update("isInActiveChat." + userId, isActive);
-    }
 
 }

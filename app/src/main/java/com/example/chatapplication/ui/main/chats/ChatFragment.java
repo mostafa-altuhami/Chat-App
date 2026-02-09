@@ -16,7 +16,7 @@ public class ChatFragment extends Fragment {
 
     private FragmentChatBinding binding;
     private ChatFragmentRvAdapter adapter;
-    ChatsViewModel viewModel;
+    private ChatsViewModel viewModel;
 
     public ChatFragment() {}
 

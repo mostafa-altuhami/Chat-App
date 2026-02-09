@@ -21,10 +21,19 @@ public class AuthRepository {
 
     private final FirebaseAuth auth;
     private PhoneAuthProvider.ForceResendingToken resendToken;
+
+    private static AuthRepository instance;
     private static final long TIMEOUT = 60L;
 
     public AuthRepository() {
         auth = FirebaseAuth.getInstance();
+    }
+
+    public static AuthRepository getRepositoryInstance() {
+        if (instance == null) {
+            instance = new AuthRepository();
+        }
+        return instance;
     }
 
     public void sendOtp(

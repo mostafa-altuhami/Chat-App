@@ -25,15 +25,14 @@ public class ChatRecyclerViewAdapter extends FirestoreRecyclerAdapter<ChatMessag
     @Override
     protected void onBindViewHolder(@NonNull ChatMessageViewHolder holder, int position, @NonNull ChatMessageModel model) {
 
-        // chek if i am the sender or not to show the right place of message
         if (model.getSenderId().equals(FirebaseUtils.currentUserId())) {
-            holder.binding.rightTv.setVisibility(View.GONE);
-            holder.binding.leftTv.setVisibility(View.VISIBLE);
-            holder.binding.leftTv.setText(model.getMessage());
-        } else {
             holder.binding.leftTv.setVisibility(View.GONE);
             holder.binding.rightTv.setVisibility(View.VISIBLE);
             holder.binding.rightTv.setText(model.getMessage());
+        } else {
+            holder.binding.rightTv.setVisibility(View.GONE);
+            holder.binding.leftTv.setVisibility(View.VISIBLE);
+            holder.binding.leftTv.setText(model.getMessage());
         }
        
     }

@@ -1,5 +1,6 @@
 package com.example.chatapplication.ui.main.chats.adapter;
 
+import static com.example.chatapplication.utils.FirebaseUtils.otherChatroomReference;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class ChatFragmentRvAdapter extends
 
         // Listen for the other user data
         ListenerRegistration registration =
-                FirebaseUtils.otherChatroomReference(model.getUserIds())
+                otherChatroomReference(model.getUserIds())
                         .addSnapshotListener((snapshot, error) -> {
 
                             if (error != null || snapshot == null || !snapshot.exists()) return;
