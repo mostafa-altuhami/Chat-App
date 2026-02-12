@@ -38,7 +38,6 @@ public class ProfileFragment extends Fragment {
     private Uri imageUri;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    // launcher to pick an image from the gallery
     private final ActivityResultLauncher<String> pickImage =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
@@ -57,14 +56,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         setInProgress(false);
         getProfileInformation();
 
         binding.fragmentProfileUpdateBtn.setOnClickListener(view -> {
-            // handle all states of the image
+
             if (imageUri != null) {
                 executor.execute(() -> uploadToCloudinary(imageUri));
 
@@ -79,18 +77,17 @@ public class ProfileFragment extends Fragment {
         // choose a picture when user clicks on the button
         binding.fragmentProfileIv.setOnClickListener(view -> pickImage.launch("image/*"));
 
-        // logout button
         binding.fragmentProfileLogoutTv.setOnClickListener(view -> {
             FirebaseUtils.logout();
-            // swap to login page again
-            startActivity(new Intent(requireContext(), LoginPhoneNumberActivity.class));
+            Intent intent = new Intent(requireContext(), LoginPhoneNumberActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
         return binding.getRoot();
 
     }
 
 
-    // fun to update the profile info
     private void updateProfileInfo() {
 
         setInProgress(true);

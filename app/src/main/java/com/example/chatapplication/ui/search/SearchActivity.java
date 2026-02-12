@@ -3,6 +3,7 @@ package com.example.chatapplication.ui.search;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.chatapplication.data.model.UserModel;
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.Query;
 public class SearchActivity extends AppCompatActivity {
 
     private ActivitySearchBinding binding;
+    SearchViewModel viewModel;
     SearchUserRecyclerAdapter adapter;
 
     @Override
@@ -24,6 +26,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.searchToolbar);
         binding.searchEdUsername.requestFocus();
+        viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
 
 
         binding.searchToolbar.setNavigationOnClickListener(view -> finish());
@@ -43,15 +46,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private void setupSearchRecyclerView(String searchTerm) {
-        Query query = FirebaseUtils.allCollectionReference()
-                .orderBy("username")
-                .startAt(searchTerm)
-                .endAt(searchTerm + "\uf8ff");
 
-        FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
-                .setQuery(query, UserModel.class).build();
-
-        adapter = new SearchUserRecyclerAdapter(options,SearchActivity.this);
+        adapter = new SearchUserRecyclerAdapter(viewModel.getSearchOptions(this, searchTerm),SearchActivity.this);
         binding.searchRvUsers.setLayoutManager(new LinearLayoutManager(this));
         binding.searchRvUsers.setAdapter(adapter);
         adapter.startListening();
