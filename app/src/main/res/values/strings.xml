@@ -44,4 +44,6 @@
     <string name="_01234512345">01234512345</string>
     <string name="account">Account</string>
     <string name="log_out">Log out</string>
+    <string name="enter_your_username">Enter your\n username</string>
+    <string name="start">Start</string>
 </resources>

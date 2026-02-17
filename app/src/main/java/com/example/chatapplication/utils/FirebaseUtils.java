@@ -1,12 +1,10 @@
 package com.example.chatapplication.utils;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -16,28 +14,18 @@ public class FirebaseUtils {
 
     public static String currentUserId() {
         return FirebaseAuth.getInstance().getUid();
-    }//
+    }
 
 
     public static boolean isLoggedIn() {
         return currentUserId() != null;
     }
 
-    public static DocumentReference currentUserDetails () {//
-        return FirebaseFirestore.getInstance().collection("users").document(currentUserId());
-    }
 
     public static CollectionReference allCollectionReference() {
         return FirebaseFirestore.getInstance().collection("users");
     }
 
-    public static DocumentReference getChatroomReference(String chatroomId) {
-        return FirebaseFirestore.getInstance().collection("chatrooms").document(chatroomId);
-    }
-
-    public static CollectionReference getChatroomCollectionReference(String chatroomId) {
-        return getChatroomReference(chatroomId).collection("chats");
-    }
 
     public static String getChatroomId(String user1, String user2) {
         if (user1.hashCode()<user2.hashCode()) {

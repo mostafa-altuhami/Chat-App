@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.chatapplication.R;
 import com.example.chatapplication.databinding.ActivityLoginOtpBinding;
-import com.example.chatapplication.ui.main.MainActivity;
 import com.example.chatapplication.utils.AndroidUtil;
 
 public class LoginOtpActivity extends AppCompatActivity {
@@ -60,7 +59,8 @@ public class LoginOtpActivity extends AppCompatActivity {
 
                 case VERIFIED:
                     setLoading(false);
-                    Intent intent = new Intent(this , MainActivity.class);
+                    Intent intent = new Intent(this , LoginUsernameActivity.class);
+                    intent.putExtra("phone", phoneNumber);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     break;

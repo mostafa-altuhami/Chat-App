@@ -1,5 +1,11 @@
 package com.example.chatapplication.data.repository;
 
+import static com.example.chatapplication.utils.Constants.CHATROOMS_COLLECTION_NAME;
+import static com.example.chatapplication.utils.Constants.CHATS_COLLECTION_NAME;
+import static com.example.chatapplication.utils.Constants.IS_INACTIVE_FIELD_NAME;
+import static com.example.chatapplication.utils.Constants.TIMESTAMP_FIELD_NAME;
+import static com.example.chatapplication.utils.Constants.UNREAD_MESSAGE_FIELD_NAME;
+
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -24,10 +30,10 @@ public class ChatMessageRepository {
     private final MutableLiveData<String> toastMessage = new MutableLiveData<>();
 
     public Query getChatMessagesQuery(String chatroomId) {
-        return db.collection("chatrooms")
+        return db.collection(CHATROOMS_COLLECTION_NAME)
                 .document(chatroomId)
-                .collection("chats")
-                .orderBy("timestamp", Query.Direction.ASCENDING);
+                .collection(CHATS_COLLECTION_NAME)
+                .orderBy(TIMESTAMP_FIELD_NAME, Query.Direction.ASCENDING);
     }
 
     public FirestoreRecyclerOptions<ChatMessageModel> getChatMessagesOptions(LifecycleOwner owner, String chatroomId) {
@@ -43,7 +49,7 @@ public class ChatMessageRepository {
 
     public void getOrCreateChatroomModel(String chatroomId, String otherUserId) {
 
-        db.collection("chatrooms")
+        db.collection(CHATROOMS_COLLECTION_NAME)
                 .document(chatroomId)
                 .get()
                 .addOnSuccessListener(doc -> {
@@ -64,14 +70,14 @@ public class ChatMessageRepository {
                                 ""
                         );
 
-                        db.collection("chatrooms")
+                        db.collection(CHATROOMS_COLLECTION_NAME)
                                 .document(chatroomId)
                                 .set(room);
 
-                        db.collection("chatrooms")
+                        db.collection(CHATROOMS_COLLECTION_NAME)
                                 .document(chatroomId)
-                                .update("unreadMessages", unreadMap,
-                                        "isInActiveChat", activeMap);
+                                .update(UNREAD_MESSAGE_FIELD_NAME, unreadMap,
+                                        IS_INACTIVE_FIELD_NAME, activeMap);
                     }
                 })
                 .addOnFailureListener(e ->
@@ -83,7 +89,7 @@ public class ChatMessageRepository {
     public void resetUnreadCount(String chatroomId, String userId) {
         String fieldPath = "unreadMessages." + userId;
 
-        db.collection("chatrooms")
+        db.collection(CHATROOMS_COLLECTION_NAME)
                 .document(chatroomId)
                 .update(fieldPath, 0);
 
@@ -91,7 +97,7 @@ public class ChatMessageRepository {
     }
 
     public void setActiveStatus(String chatroomId, String userId, boolean isActive) {
-        db.collection("chatrooms")
+        db.collection(CHATROOMS_COLLECTION_NAME)
                 .document(chatroomId)
                 .update("isInActiveChat." + userId, isActive);
     }
@@ -103,7 +109,7 @@ public class ChatMessageRepository {
 
         db.runTransaction(transaction -> {
 
-            DocumentReference chatroomRef = db.collection("chatrooms").document(chatroomId);
+            DocumentReference chatroomRef = db.collection(CHATROOMS_COLLECTION_NAME).document(chatroomId);
             DocumentSnapshot chatSnapshot = transaction.get(chatroomRef);
 
             ChatroomModel room = chatSnapshot.toObject(ChatroomModel.class);
@@ -128,7 +134,7 @@ public class ChatMessageRepository {
             transaction.update(chatroomRef, updates);
 
             DocumentReference chatRef = chatroomRef
-                    .collection("chats")
+                    .collection(CHATS_COLLECTION_NAME)
                     .document();
 
             ChatMessageModel chatMessage = new ChatMessageModel(

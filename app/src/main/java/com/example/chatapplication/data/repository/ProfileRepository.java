@@ -1,6 +1,7 @@
 package com.example.chatapplication.data.repository;
 
 import static com.example.chatapplication.utils.Constants.UPLOAD_PRESET;
+import static com.example.chatapplication.utils.Constants.USER_COLLECTION_NAME;
 
 import android.net.Uri;
 
@@ -25,7 +26,7 @@ public class ProfileRepository {
     public LiveData<UserModel> getUserDetails() {
         MutableLiveData<UserModel> user = new MutableLiveData<>();
 
-        db.collection("users")
+        db.collection(USER_COLLECTION_NAME)
                 .document(FirebaseUtils.currentUserId())
                 .get()
                 .addOnSuccessListener( doc -> {
@@ -42,7 +43,7 @@ public class ProfileRepository {
     public LiveData<Boolean> updateUserDetails(UserModel userModel) {
         MutableLiveData<Boolean> success = new MutableLiveData<>();
 
-        db.collection("users")
+        db.collection(USER_COLLECTION_NAME)
                 .document(FirebaseUtils.currentUserId())
                 .set(userModel)
                 .addOnSuccessListener(aVoid -> {

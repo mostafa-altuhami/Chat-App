@@ -27,6 +27,7 @@ public class ProfileFragment extends Fragment {
     private String url;
     private UserModel profile;
     private ProfileViewModel viewModel;
+    private String currentUsername;
     private Uri imageUri;
     private boolean arrowFlag = true;
 
@@ -56,16 +57,10 @@ public class ProfileFragment extends Fragment {
         observeToast();
         getProfileInformation();
 
-        binding.fragmentProfileUpdateBtn.setOnClickListener(view -> {
-            if (imageUri != null) {
-                uploadToCloudinary(imageUri);
-            } else if (profile.getImageUrl() != null && !profile.getImageUrl().isEmpty()) {
-                updateProfileInfo();
-            } else {
-                binding.fragmentProfileIv.setImageResource(R.drawable.ic_person);
-                updateProfileInfo();
-            }
-        });
+        binding.fragmentProfileUpdateBtn.setOnClickListener(view ->
+                saveUserData()
+        );
+
 
         binding.ivAccountArrow.setOnClickListener(view -> {
             if (arrowFlag) {
@@ -81,10 +76,9 @@ public class ProfileFragment extends Fragment {
         });
 
         // choose a picture when user clicks on the button
-        binding.fragmentProfileIv.setOnClickListener(view -> {
-                pickImage.launch("image/*");
-
-        });
+        binding.fragmentProfileIv.setOnClickListener(view ->
+                pickImage.launch("image/*")
+        );
 
         binding.fragmentProfileLogoutTv.setOnClickListener(view -> {
             FirebaseUtils.logout();
@@ -97,6 +91,17 @@ public class ProfileFragment extends Fragment {
     }
 
 
+    private void saveUserData () {
+        boolean isNameChanged = !currentUsername.equals(binding.profileUpdateUsername.getText().toString());
+        if (imageUri != null) {
+            uploadToCloudinary(imageUri);
+        } else if (isNameChanged) {
+            updateProfileInfo();
+        } else {
+            binding.fragmentProfileIv.setImageResource(R.drawable.ic_person);
+        }
+
+    }
     private void updateProfileInfo() {
 
         setInProgress(true);
@@ -120,6 +125,7 @@ public class ProfileFragment extends Fragment {
         viewModel.getUserDetails().observe( getViewLifecycleOwner() ,userModel -> {
             if (userModel != null) {
                 profile = userModel;
+                currentUsername = profile.getUsername();
                 binding.fragmentProfileUsernameTv.setText(profile.getUsername());
                 binding.profileUpdateUsername.setText(profile.getUsername());
                 binding.fragmentProfilePhoneTv.setText(profile.getPhone());

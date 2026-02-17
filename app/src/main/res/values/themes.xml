@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ChatApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/my_primary</item>
+        <item name="colorPrimary">@color/teal</item>
         <item name="colorSecondary">@color/my_secondary</item>
         <item name="android:statusBarColor">@color/teal</item>
         <item name="android:navigationBarColor">@color/teal</item>
@@ -16,8 +16,11 @@
         <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="Theme.ChatApplication.Splash" parent="Base.Theme.ChatApplication" >
+    <style name="Theme.ChatApplication.Splash" parent="Theme.SplashScreen" >
 
+        <item name="android:windowBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/lancher_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.ChatApplication</item>
 
     </style>
 

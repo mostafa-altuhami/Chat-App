@@ -1,18 +1,16 @@
 package com.example.chatapplication.data.repository;
 
+import static com.example.chatapplication.utils.Constants.CHATROOMS_COLLECTION_NAME;
+import static com.example.chatapplication.utils.Constants.LAST_MESSAGE_TIMESTAMP_FIELD_NAME;
+import static com.example.chatapplication.utils.Constants.USER_IDS_FIELD_NAME;
 import static com.example.chatapplication.utils.FirebaseUtils.currentUserId;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
-
-import com.example.chatapplication.data.model.ChatMessageModel;
 import com.example.chatapplication.data.model.ChatroomModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 
-import java.util.List;
 
 public class ChatRoomRepository {
 
@@ -35,9 +33,9 @@ public class ChatRoomRepository {
 
 
     public Query getChatroomsQuery() {
-        return db.collection("chatrooms")
-                .whereArrayContains("userIds", currentUserId())
-                .orderBy("lastMessageTimestamp", Query.Direction.DESCENDING);
+        return db.collection(CHATROOMS_COLLECTION_NAME)
+                .whereArrayContains(USER_IDS_FIELD_NAME, currentUserId())
+                .orderBy(LAST_MESSAGE_TIMESTAMP_FIELD_NAME, Query.Direction.DESCENDING);
     }
 
     public FirestoreRecyclerOptions<ChatroomModel> getOptions (LifecycleOwner owner) {

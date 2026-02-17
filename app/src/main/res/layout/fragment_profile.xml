@@ -140,7 +140,7 @@
             android:hint="@string/username_et_hint"
             android:textColor="@color/teal"
             android:textColorHint="@color/teal_light"
-            android:inputType="phone"
+            android:inputType="text"
             android:layout_marginHorizontal="70dp"
             android:layout_marginBottom="24dp"
             android:padding="10dp"
