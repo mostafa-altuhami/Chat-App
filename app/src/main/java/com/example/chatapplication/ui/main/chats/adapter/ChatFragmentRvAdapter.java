@@ -42,7 +42,7 @@ public class ChatFragmentRvAdapter extends
             @NonNull ChatroomModel model
     ) {
 
-        // Listen for the other user data
+
         ListenerRegistration registration =
                 otherChatroomReference(model.getUserIds())
                         .addSnapshotListener((snapshot, error) -> {

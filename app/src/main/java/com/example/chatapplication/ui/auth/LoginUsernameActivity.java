@@ -1,9 +1,12 @@
 package com.example.chatapplication.ui.auth;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,6 +26,8 @@ public class LoginUsernameActivity extends AppCompatActivity {
     private String phoneNumber;
     private ProfileViewModel viewModel;
     private UserModel profile;
+    private Uri imageUri;
+    private ActivityResultLauncher<String> pickImage;
 
 
     @Override
@@ -31,13 +36,34 @@ public class LoginUsernameActivity extends AppCompatActivity {
         binding = ActivityLoginUsernameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        pickImage =
+                registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                    if (uri != null) {
+                        imageUri = uri;
+
+                        Glide.with(this)
+                                .load(uri)
+                                .circleCrop()
+                                .placeholder(R.drawable.ic_person)
+                                .into(binding.ivPersonIcon);
+                    }
+                });
 
         phoneNumber = getIntent().getStringExtra("phone");
         setInProgress(false);
         getInfo();
 
-        binding.btnStart.setOnClickListener(view ->
-                setUsername()
+        binding.btnStart.setOnClickListener(view -> {
+            setUsername();
+
+            if (imageUri != null) {
+                viewModel.uploadProfileImage(imageUri);
+            } else viewModel.updateUserDetails(profile);
+        });
+
+
+        binding.ivPersonIcon.setOnClickListener(view ->
+                pickImage.launch("image/*")
         );
 
     }
