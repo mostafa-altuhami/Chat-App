@@ -25,9 +25,7 @@
            app:title="Chats"
            app:titleTextColor="@color/white"
            app:contentInsetStart="16dp"
-           app:contentInsetEnd="16dp"
-           app:popupTheme="@style/ThemeOverlay.Material3.Light"
-           app:subtitleTextAppearance="@style/Toolbar.TitleText">
+           app:contentInsetEnd="16dp">
 
            <ImageButton
                android:id="@+id/main_ib_search"

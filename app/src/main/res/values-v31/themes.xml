@@ -3,23 +3,28 @@
     <style name="Base.Theme.ChatApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/my_primary</item>
         <item name="colorSecondary">@color/my_secondary</item>
-        <item name="android:statusBarColor">@color/black</item>
-        <item name="android:navigationBarColor">@color/black</item>
 
 
     </style>
 
     <style name="Theme.ChatApplication" parent="Base.Theme.ChatApplication" />
 
-    <style name="Theme.ChatApplication.Splash" parent="Base.Theme.ChatApplication" >
-
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-
-        <item name="windowSplashScreenBackground">@android:color/transparent</item>
-        <item name="windowSplashScreenAnimatedIcon">@null</item>
-        <item name="windowSplashScreenAnimationDuration">0</item>
-        <item name="postSplashScreenTheme">@style/Theme.ChatApplication</item>
-
+    <style name="Toolbar.TitleText" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize" >22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="Theme.ChatApplication.Splash" parent="Theme.SplashScreen" >
+        <item name="android:windowBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.ChatApplication</item>
+    </style>
+
+    <style name="AppButton">
+        <item name="android:background">@drawable/btn_bg</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">14dp</item>
+    </style>
+
 </resources>

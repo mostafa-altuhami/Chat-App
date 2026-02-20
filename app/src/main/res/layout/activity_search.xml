@@ -25,9 +25,7 @@
             app:contentInsetStart="16dp"
             app:navigationIcon="@drawable/ic_back"
             app:navigationIconTint="@color/white"
-            app:contentInsetEnd="16dp"
-            app:popupTheme="@style/ThemeOverlay.Material3.Light"
-            app:subtitleTextAppearance="@style/Toolbar.TitleText"/>
+            app:contentInsetEnd="16dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

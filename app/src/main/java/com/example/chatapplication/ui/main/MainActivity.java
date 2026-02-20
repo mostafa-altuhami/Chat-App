@@ -3,6 +3,7 @@ package com.example.chatapplication.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import com.example.chatapplication.ui.auth.LoginPhoneNumberActivity;
 import com.example.chatapplication.ui.main.profile.ProfileFragment;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         if (!FirebaseUtils.isLoggedIn()) {
             startActivity(new Intent(this, LoginPhoneNumberActivity.class));

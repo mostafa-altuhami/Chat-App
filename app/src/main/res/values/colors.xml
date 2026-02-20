@@ -10,7 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="chat_message_sender">#29728F</color>
     <color name="chat_message_receiver">#8AD532</color>
-    <color name="ic_chat_app_icon_background">#FFFFFF</color>
     <color name="teal">#009688</color>
     <color name="teal_light">#5B8984</color>
     <color name="teal_dark">#256A72</color>
@@ -19,5 +18,5 @@
     <color name="teal_dark2">#E04E787A</color>
     <color name="teal_dark1">#21636A</color>
     <color name="gray">#B3DBDC</color>
-
+    <color name="ic_chat_app_icon_background">#BED1CD</color>
 </resources>

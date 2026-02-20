@@ -13,11 +13,9 @@
     <color name="text_gray">#B0B0B0</color>
     <color name="chat_message_sender">#1565C0</color>
     <color name="chat_message_receiver">#558B2F</color>
-    <color name="ic_chat_app_icon_background">#1E1E1E</color>
-    <color name="teal">#26A69A</color>
+    <color name="teal">#1B5E63</color>
     <color name="teal_light">#4DB6AC</color>
-    <color name="teal_dark">#1B5E63</color>
     <color name="teal_dark1">#174A4F</color>
     <color name="teal_dark2">#CC1B5E63</color>
-
+    <color name="ic_chat_app_icon_background">#BED1CD</color>
 </resources>
