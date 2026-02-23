@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
 import com.example.chatapplication.ui.auth.LoginPhoneNumberActivity;
+import com.example.chatapplication.ui.auth.LoginUsernameActivity;
 import com.example.chatapplication.ui.main.profile.ProfileFragment;
 import com.example.chatapplication.R;
 import com.example.chatapplication.ui.search.SearchActivity;
@@ -31,34 +32,46 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        FirebaseUtils.checkProfileUsername(isCompleted -> {
+            if (!isCompleted) {
+                startActivity(new Intent(this, LoginUsernameActivity.class));
+                finish();
+            } else openMainContent();
+        });
+    }
+
+
+    private void openMainContent() {
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.mainToolbar);
 
         chatFragment = new ChatFragment();
         profileFragment = new ProfileFragment();
 
-
-
-        binding.mainIbSearch.setOnClickListener((v) ->
-                startActivity(new Intent(getBaseContext(), SearchActivity.class))
-        );
-
         binding.mainBtnNav.setOnItemSelectedListener(menuItem -> {
+
             if (menuItem.getItemId() == R.id.menue_chat) {
-                getSupportFragmentManager().beginTransaction().replace(binding.mainFlContent.getId(), chatFragment).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(binding.mainFlContent.getId(), chatFragment)
+                        .commit();
             }
+
             if (menuItem.getItemId() == R.id.menue_profile) {
-                getSupportFragmentManager().beginTransaction().replace(binding.mainFlContent.getId(), profileFragment).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(binding.mainFlContent.getId(), profileFragment)
+                        .commit();
             }
+
             return true;
         });
 
-
         binding.mainBtnNav.setSelectedItemId(R.id.menue_chat);
 
-
-
+        binding.fabBtn.setOnClickListener(view ->
+                startActivity(new Intent(this, SearchActivity.class))
+        );
     }
+
 
 }

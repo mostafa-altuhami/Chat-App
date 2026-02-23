@@ -1,6 +1,8 @@
 package com.example.chatapplication.utils;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -52,6 +54,22 @@ public class FirebaseUtils {
         FirebaseAuth.getInstance().signOut();
     }//
 
+
+    public interface ProfileCheckCallback {
+        void onResult(boolean isCompleted);
+    }
+
+    public static void checkProfileUsername(ProfileCheckCallback callback) {
+        allCollectionReference()
+                .document(currentUserId())
+                .get()
+                .addOnSuccessListener(snapshot -> {
+
+                    String username = snapshot.getString("username");
+                    boolean completed = username != null && !username.isEmpty();
+                    callback.onResult(completed);
+                });
+    }
 
 
 }

@@ -35,7 +35,12 @@ public class UserModel {
         this.username = username;
         this.timestamp = timestamp;
         this.userId = userId;
+    }
 
+    public UserModel(String phone, String userId, Timestamp timestamp) {
+        this.phone = phone;
+        this.userId = userId;
+        this.timestamp = timestamp;
     }
 
     public String getPhone() {

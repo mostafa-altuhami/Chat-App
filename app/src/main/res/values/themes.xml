@@ -3,6 +3,8 @@
     <style name="Base.Theme.ChatApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/teal</item>
         <item name="colorSecondary">@color/my_secondary</item>
+        <item name="android:statusBarColor">@color/teal</item>
+        <item name="android:navigationBarColor">@color/teal</item>
 
     </style>
 

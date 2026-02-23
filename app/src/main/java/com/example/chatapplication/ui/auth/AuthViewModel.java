@@ -6,6 +6,8 @@ import android.os.CountDownTimer;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.chatapplication.data.model.UserModel;
 import com.example.chatapplication.data.repository.AuthRepository;
 
 public class AuthViewModel extends ViewModel {
@@ -130,6 +132,10 @@ public class AuthViewModel extends ViewModel {
                 timerText.setValue(0L);
             }
         }.start();
+    }
+
+    public void saveUserToServer(UserModel userModel) {
+        repository.saveUserToServer(userModel);
     }
 
     @Override

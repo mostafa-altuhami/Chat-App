@@ -1,13 +1,19 @@
 package com.example.chatapplication.data.repository;
 
+import static com.example.chatapplication.utils.Constants.USER_COLLECTION_NAME;
+
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
+
+import com.example.chatapplication.data.model.UserModel;
+import com.example.chatapplication.utils.FirebaseUtils;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +27,7 @@ public class AuthRepository {
 
     private final FirebaseAuth auth;
     private PhoneAuthProvider.ForceResendingToken resendToken;
-
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static AuthRepository instance;
     private static final long TIMEOUT = 60L;
 
@@ -121,5 +127,12 @@ public class AuthRepository {
                 callback.onCodeSent(verificationId);
             }
         };
+    }
+
+    public void saveUserToServer (UserModel userModel) {
+        db.collection(USER_COLLECTION_NAME)
+                .document(FirebaseUtils.currentUserId())
+                .set(userModel);
+
     }
 }

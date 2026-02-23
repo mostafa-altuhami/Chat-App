@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 import com.example.chatapplication.data.model.UserModel;
+import com.example.chatapplication.ui.auth.LoginUsernameActivity;
+import com.example.chatapplication.ui.main.MainActivity;
 
 public class AndroidUtil {
 
@@ -28,7 +30,5 @@ public class AndroidUtil {
         model.setFcmToken(intent.getStringExtra("fcmToken"));
         return model;
     }
-
-
 
 }

@@ -6,15 +6,19 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.chatapplication.R;
+import com.example.chatapplication.data.model.UserModel;
 import com.example.chatapplication.databinding.ActivityLoginOtpBinding;
 import com.example.chatapplication.utils.AndroidUtil;
+import com.example.chatapplication.utils.FirebaseUtils;
+import com.google.firebase.Timestamp;
 
 public class LoginOtpActivity extends AppCompatActivity {
 
     private ActivityLoginOtpBinding binding;
 
     private AuthViewModel viewModel;
-    String  phoneNumber;
+    private UserModel userModel;
+    private String  phoneNumber;
 
 
     @Override
@@ -59,6 +63,8 @@ public class LoginOtpActivity extends AppCompatActivity {
 
                 case VERIFIED:
                     setLoading(false);
+                    userModel = new UserModel(phoneNumber, FirebaseUtils.currentUserId(), Timestamp.now());
+                    viewModel.saveUserToServer(userModel);
                     Intent intent = new Intent(this , LoginUsernameActivity.class);
                     intent.putExtra("phone", phoneNumber);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
