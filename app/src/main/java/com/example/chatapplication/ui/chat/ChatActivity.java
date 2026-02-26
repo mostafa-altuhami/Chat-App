@@ -19,6 +19,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private ActivityChatBinding binding;
     private UserModel model;
+    private ChatRecyclerViewAdapter adapter;
     private String chatroomId;
     private ChatMessageViewModel viewModel;
 
@@ -70,20 +71,19 @@ public class ChatActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
 
-        ChatRecyclerViewAdapter adapter = new ChatRecyclerViewAdapter(viewModel.getChatMessagesOptions(this,
+         adapter = new ChatRecyclerViewAdapter(viewModel.getChatMessagesOptions(this,
                 chatroomId), ChatActivity.this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setReverseLayout(true);
         manager.setStackFromEnd(true);
         binding.chatRvMessages.setLayoutManager(manager);
         binding.chatRvMessages.setAdapter(adapter);
-        adapter.startListening();
+        binding.chatRvMessages.setItemAnimator(null);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
 
-                binding.chatRvMessages.smoothScrollToPosition(0);
+                binding.chatRvMessages.smoothScrollToPosition(adapter.getItemCount() - 1);
             }
         });
 
@@ -102,16 +102,17 @@ public class ChatActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         viewModel.setActiveStatus(chatroomId, FirebaseUtils.currentUserId(), true);
         viewModel.resetUnreadCount(chatroomId, FirebaseUtils.currentUserId());
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         viewModel.setActiveStatus(chatroomId, FirebaseUtils.currentUserId(), false);
     }
+
 }
 

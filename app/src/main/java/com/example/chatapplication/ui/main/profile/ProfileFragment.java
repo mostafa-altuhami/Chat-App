@@ -40,8 +40,7 @@ public class ProfileFragment extends Fragment {
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        pickImage =
-                registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+        pickImage = registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                     if (uri != null) {
                         imageUri = uri;
 
@@ -97,8 +96,6 @@ public class ProfileFragment extends Fragment {
             uploadToCloudinary(imageUri);
         } else if (isNameChanged) {
             updateProfileInfo();
-        } else {
-            binding.fragmentProfileIv.setImageResource(R.drawable.ic_person);
         }
 
     }
@@ -116,8 +113,15 @@ public class ProfileFragment extends Fragment {
         profile.setUsername(newUsername);
         profile.setImageUrl(url);
 
-        viewModel.updateUserDetails(profile).observe(getViewLifecycleOwner(), success ->
-                setInProgress(false));
+        viewModel.updateUserDetails(profile).observe(getViewLifecycleOwner(), success -> {
+            if (Boolean.TRUE.equals(success)){
+                currentUsername = newUsername;
+                imageUri = null;
+                setInProgress(false);
+            }
+
+        });
+
 
     }
 

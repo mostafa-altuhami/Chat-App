@@ -46,28 +46,6 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new SearchUserRecyclerAdapter(viewModel.getSearchOptions(this, searchTerm),SearchActivity.this);
         binding.searchRvUsers.setLayoutManager(new LinearLayoutManager(this));
         binding.searchRvUsers.setAdapter(adapter);
-        adapter.startListening();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (adapter != null)
-            adapter.startListening();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (adapter != null)
-            adapter.stopListening();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (adapter != null)
-            adapter.startListening();
     }
 
 

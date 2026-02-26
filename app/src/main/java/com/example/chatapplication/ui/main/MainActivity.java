@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+
         if (!FirebaseUtils.isLoggedIn()) {
             startActivity(new Intent(this, LoginPhoneNumberActivity.class));
             finish();
