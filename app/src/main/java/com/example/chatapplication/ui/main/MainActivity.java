@@ -2,6 +2,8 @@ package com.example.chatapplication.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
@@ -9,7 +11,7 @@ import com.example.chatapplication.ui.auth.LoginPhoneNumberActivity;
 import com.example.chatapplication.ui.auth.LoginUsernameActivity;
 import com.example.chatapplication.ui.main.profile.ProfileFragment;
 import com.example.chatapplication.R;
-import com.example.chatapplication.ui.search.SearchActivity;
+import com.example.chatapplication.ui.search.AddActivity;
 import com.example.chatapplication.databinding.ActivityMainBinding;
 import com.example.chatapplication.ui.main.chats.ChatFragment;
 import com.example.chatapplication.utils.FirebaseUtils;
@@ -56,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(binding.mainFlContent.getId(), chatFragment)
                         .commit();
+                binding.fabBtn.setVisibility(View.VISIBLE);
             }
 
             if (menuItem.getItemId() == R.id.menue_profile) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(binding.mainFlContent.getId(), profileFragment)
                         .commit();
+                binding.fabBtn.setVisibility(View.GONE);
             }
 
             return true;
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         binding.mainBtnNav.setSelectedItemId(R.id.menue_chat);
 
         binding.fabBtn.setOnClickListener(view ->
-                startActivity(new Intent(this, SearchActivity.class))
+                startActivity(new Intent(this, AddActivity.class))
         );
     }
 

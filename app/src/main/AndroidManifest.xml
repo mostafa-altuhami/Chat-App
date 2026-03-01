@@ -24,7 +24,7 @@
             android:name=".ui.chat.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.search.SearchActivity"
+            android:name=".ui.search.AddActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.LoginOtpActivity"

@@ -20,10 +20,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.Objects;
 
-public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserModel, SearchUserRecyclerAdapter.UserModelViewHolder> {
+public class AddRecyclerAdapter extends FirestoreRecyclerAdapter<UserModel, AddRecyclerAdapter.UserModelViewHolder> {
 
    Context context;
-    public SearchUserRecyclerAdapter(@NonNull FirestoreRecyclerOptions<UserModel> options, Context context) {
+    public AddRecyclerAdapter(@NonNull FirestoreRecyclerOptions<UserModel> options, Context context) {
         super(options);
         this.context = context;
 

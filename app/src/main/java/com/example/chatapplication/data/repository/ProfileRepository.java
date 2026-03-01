@@ -80,13 +80,12 @@ public class ProfileRepository {
                     public void onSuccess(String requestId, Map resultData) {
                        String url = (String) resultData.get("secure_url");
                        result.postValue(url);
-                       toastMessage.setValue("Uploaded Successfully");
                     }
 
                     @Override
                     public void onError(String requestId, ErrorInfo error) {
                         result.postValue(null);
-                        toastMessage.setValue("Upload Failed :" + error.getDescription());
+                        toastMessage.setValue("Upload Failed!");
                     }
 
                     @Override

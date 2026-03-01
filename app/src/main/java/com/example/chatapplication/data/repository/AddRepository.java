@@ -10,15 +10,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class SearchRepository {
+public class AddRepository {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public FirestoreRecyclerOptions<UserModel> getSearchOptions(LifecycleOwner owner, String searchTerm) {
+    public FirestoreRecyclerOptions<UserModel> getAddOption(LifecycleOwner owner) {
         Query query = db.collection(USER_COLLECTION_NAME)
-                .orderBy(USERNAME_FIELD_NAME)
-                .startAt(searchTerm)
-                .endAt(searchTerm + "\uf8ff");
+                .orderBy(USERNAME_FIELD_NAME);
 
 
         return new FirestoreRecyclerOptions.Builder<UserModel>()
